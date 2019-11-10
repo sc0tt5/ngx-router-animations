@@ -18,7 +18,7 @@ export const routerTransition: AnimationReferenceMetadata = animation([
       ':leave > *',
       [
         style(sharedStyles),
-        animate('0.2s ease-in-out', style({ transform: 'translateY(-3%)', opacity: 0 })),
+        animate('0.3s ease-in-out', style({ transform: 'translateY(-2%)', opacity: 0 })),
         style({ position: 'fixed' })
       ],
       { optional: true }
@@ -27,11 +27,11 @@ export const routerTransition: AnimationReferenceMetadata = animation([
       ':enter > *',
       [
         style({
-          transform: 'translateY(-3%)',
+          transform: 'translateY(-2%)',
           opacity: 0,
           position: 'static'
         }),
-        animate('0.5s ease-in-out', style(sharedStyles))
+        animate('0.3s ease-in-out', style(sharedStyles))
       ],
       { optional: true }
     )
