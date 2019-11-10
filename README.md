@@ -1,6 +1,6 @@
 # Router Animation Demo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.1.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.0-rc.1. Demo for router animations with lazy loading modules.
 
 ## Development server
 
