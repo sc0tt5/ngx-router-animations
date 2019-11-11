@@ -22,7 +22,13 @@ export class AnimationDemoComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // subscribe to loader/interceptor
     this.loaderService.isLoading.subscribe(loading => {
-      this.loading = loading;
+      if (loading) {
+        this.loading = loading;
+      } else {
+        setTimeout(() => {
+          this.loading = loading;
+        }, 500); // dealy to kind of simulate api call (just for demo)
+      }
     });
   }
 
