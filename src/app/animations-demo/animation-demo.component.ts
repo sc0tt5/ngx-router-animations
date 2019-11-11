@@ -1,10 +1,9 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { routerTransition } from '@core/animations/router-animations';
 import { Page } from '@core/models/page';
 import { Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
 import { LoaderService } from '../shared/services/loader.service';
 
 @Component({
