@@ -1,9 +1,11 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { routerTransition } from '@core/animations/router-animations';
+import { Page } from '@core/models/page';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+import { LoaderService } from '../shared/services/loader.service';
 
 @Component({
   selector: 'animation-demo',
@@ -11,33 +13,24 @@ import { filter, takeUntil } from 'rxjs/operators';
   styleUrls: ['./animation-demo.component.scss'],
   animations: [trigger('routerTransition', [transition('* => *', useAnimation(routerTransition))])] // router animation
 })
-export class AnimationDemoComponent implements OnInit {
+export class AnimationDemoComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();
   loading: boolean;
+  page: Page;
 
-  constructor(private router: Router) {}
+  constructor(private loaderService: LoaderService, private router: Router) {}
 
   ngOnInit() {
-    this.subscribeToRouterEvents();
-    this.loading = true; // show loading indicator on page load
+    // subscribe to loader/interceptor
+    this.loaderService.isLoading.subscribe(loading => {
+      this.loading = loading;
+    });
   }
 
-  // loading indicator
-  private subscribeToRouterEvents() {
-    this.router.events
-      .pipe(
-        takeUntil(this.unsubscribe$),
-        filter(event => event instanceof NavigationStart || event instanceof NavigationEnd)
-      )
-      .subscribe(event => {
-        if (event instanceof NavigationStart) {
-          this.loading = true; // show loading indicator
-        } else {
-          setTimeout(() => {
-            this.loading = false; // hide loading indicator
-          }, 500);
-        }
-      });
+  // to prevent memory leaks
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   // pass router state to routerTransition

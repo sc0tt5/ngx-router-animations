@@ -1,17 +1,21 @@
 <main>
   <!-- loading indicator -->
-  <div *ngIf="loading" class="progress-bar">
+  <div *ngIf="loading" class="progress-loader">
     <span class="bar">
       <span class="progress"></span>
     </span>
   </div>
 
   <!-- nav -->
-  <button class="animation-triggers" routerLink="/page-one">Page One</button>
-  <button class="animation-triggers" routerLink="/page-two">Page Two</button>
+  <button class="animation-triggers" routerLink="/page-one" routerLinkActive="active">
+    Page One
+  </button>
+  <button class="animation-triggers" routerLink="/page-two" routerLinkActive="active">
+    Page Two
+  </button>
 
   <!-- pages / router-outlet -->
   <div class="router-wrapper" [@routerTransition]="getState(o)">
-    <router-outlet #o="outlet"> </router-outlet>
+    <router-outlet #o="outlet"></router-outlet>
   </div>
 </main>
