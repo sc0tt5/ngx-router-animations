@@ -25,54 +25,22 @@ button {
   }
 }
 
-// loading indicator ====================================
-// source: https://codepen.io/artboardartisan/pen/VLzKVN
-
-// color variables
-$blue: #1c79b8;
-$gray-light: #eef1f3;
-
-// bar variables
-$bar-size: 1px;
-$bar-radius: 0px;
-$bar-bg: rgba(0, 0, 0, 0.075);
-
-// animation
-@keyframes loader {
-  0% {
-    width: 10%;
-  }
-
-  20% {
-    width: 85%;
-  }
-
-  25% {
-    width: 99%;
-  }
-}
-
-// bar
-.progress-loader {
-  border-radius: $bar-radius;
+// loading indicator
+.loading-indicator {
   overflow: hidden;
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
+
   span {
     display: block;
   }
-}
 
-.bar {
-  background: $bar-bg;
-}
-
-.progress {
-  animation: loader 2s ease forwards;
-  background: $blue;
-  color: #fff;
-  padding: $bar-size;
-  width: 0;
+  &-progress {
+    background: #1c79b8;
+    color: #fff;
+    padding: 2px;
+    width: 0;
+  }
 }

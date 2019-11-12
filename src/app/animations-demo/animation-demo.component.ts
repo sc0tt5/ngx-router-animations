@@ -1,7 +1,11 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { routerTransition } from '@core/animations/router-animations';
+import {
+  routerTransitionPageLoad,
+  routerTransitionLoadingStart,
+  routerTransitionLoadingEnd
+} from '@core/animations/router-animations';
 import { Page } from '@core/models/page';
 import { Subject } from 'rxjs';
 import { LoaderService } from '../shared/services/loader.service';
@@ -10,7 +14,13 @@ import { LoaderService } from '../shared/services/loader.service';
   selector: 'animation-demo',
   templateUrl: './animation-demo.component.html',
   styleUrls: ['./animation-demo.component.scss'],
-  animations: [trigger('routerTransition', [transition('* => *', useAnimation(routerTransition))])] // router animation
+  animations: [
+    trigger('pageLoad', [transition('* => *', useAnimation(routerTransitionPageLoad))]),
+    trigger('loadingIndicator', [
+      transition(':enter', [useAnimation(routerTransitionLoadingStart)]),
+      transition(':leave', [useAnimation(routerTransitionLoadingEnd)])
+    ])
+  ] // router animation
 })
 export class AnimationDemoComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();
